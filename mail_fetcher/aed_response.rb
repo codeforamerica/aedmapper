@@ -2,6 +2,7 @@ require 'net/smtp'
 require 'mustache'
 require 'httparty'
 load 'smtp_api.rb'
+config = YAML::load File.read(File.expand_path('~/.aedmapperrc'))
 
 module Mailer
   class AEDResponse
@@ -24,7 +25,7 @@ module Mailer
     end
     
     def initialize(doc_id)
-      doc_url = ENV['AED_COUCH_URL'] + doc_id
+      doc_url = config['couch_url'] + doc_id
       doc = JSON.parse(HTTParty.get(doc_url).body)
       raise "doc missing: #{doc}" if doc.keys.index {|key| key == "error"}
       
@@ -45,7 +46,7 @@ module Mailer
       mime =  create_mime(from, to, subject, text, html, header)
 
       # send the message
-      smtp = Net::SMTP.start('smtp.sendgrid.net', 25, from, ENV['SENDGRID_USER'], ENV['SENDGRID_PASS'], :plain)
+      smtp = Net::SMTP.start('smtp.sendgrid.net', 25, from, config['sendgrid_user'], config['sendgrid_pass'], :plain)
       smtp.send_message mime, from, to
       smtp.finish
     end
