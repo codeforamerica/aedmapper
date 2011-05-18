@@ -6,25 +6,17 @@
   <title>AED Mapper</title>
 	<link rel="stylesheet"  href="style/jquery.mobile-1.0a4.1.min.css" />
 	<link rel="stylesheet"  href="style/style.css" />
-	<script src="script/jquery-1.4.3.min.js"></script>
-	<script type="text/javascript">
-  	$(document).bind("mobileinit", function(){
-      $.extend(  $.mobile , {
-        hashListeningEnabled: false
-      });
-    });
-	</script>
-	<script src="script/jquery.mobile-1.0a4.1.min.js"></script>    
+	<script src="script/jquery-1.6.1.min.js"></script>
   <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
 	<script src="script/sammy.js"></script>    
 	<script src="script/aedmapper.js"></script>    
   </head>
-  <body onload="">
-    <div data-role="page" data-theme="c" id="map">		
-  		<div data-role="header">
-  			<h1>AED Mapper</h1>
-  		</div>
-  		<div data-role="content">	
+  <body class="ui-mobile-viewport">
+    <div data-role="page" data-theme="c" id="map" data-url="map" class="ui-page ui-body-c ui-page-active">		
+    	<div data-role="header" class="ui-bar-c ui-header" role="banner">
+    		<h1 class="ui-title" tabindex="0" role="heading" aria-level="1">CatMapper</h1>
+    	</div>
+    	<div data-role="content" class="ui-content" role="main">	
   			<div id="map_canvas"></div>
   			<div class="crosshair">
     			<div class="top"></div>
@@ -32,20 +24,27 @@
     			<div class="left"></div>
     			<div class="bottom"></div>
   			</div>
-  			<a href="#" data-role="button" onclick="uploadLocation();">Update Location</a> 
-  		</div>
-  	</div>
-  	
-  	<div data-role="page" id="email"> 
-  		<div data-role="header" data-theme="e" data-position="inline"> 
-  			<h1>Success!</h1> 
-  		</div> 
+        <a href="#" data-role="button" data-icon="delete" data-theme="c" class="saveButton ui-btn ui-btn-icon-left ui-btn-corner-all ui-shadow ui-btn-down-c ui-btn-hover-c">
+    		  <span class="ui-btn-inner ui-btn-corner-all">
+    		    <span class="ui-btn-text">Update Location</span>
+            <span class="ui-icon ui-icon-delete ui-icon-shadow"></span>
+          </span>
+        </a>
+    	</div>
+    </div>
 
-  		<div data-role="content" data-theme="e"> 
-  			<h1>AED Mapped!</h1> 
+  	<div data-role="dialog" id="email" data-url="email" class="detailsDialog ui-dialog ui-page ui-body-a ui-page-active" role="dialog"> 
+    	<div data-role="header" data-theme="e" data-position="inline" class="ui-corner-top ui-overlay-shadow ui-bar-e ui-header" role="banner">
+    	  <a href="#" data-icon="delete" data-rel="back" data-iconpos="notext" class="closeDialog ui-btn-left ui-btn ui-btn-up-e ui-btn-icon-notext ui-btn-corner-all ui-shadow" title="Close" data-theme="e"><span class="ui-btn-inner ui-btn-corner-all">
+    	    <span class="ui-btn-text">Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span>
+    	  </a> 
+    		<h1 class="ui-title" tabindex="0" role="heading" aria-level="1">Success!</h1> 
+    	</div> 
+    	<div data-role="content" data-theme="e" class="ui-content ui-body-c ui-corner-bottom ui-overlay-shadow ui-body-e" role="main"> 
+      	<h1>AED Mapped!</h1> 
   			<p>Thanks! Email more photos of the AED to:</p>
-  			<p><a id="email-link"><span id="email-address"></span></a></p> 
-  		</div> 
-  	</div>
+  			<p><a id="email-link"><span id="email-address"></span></a></p>
+    	</div> 
+    </div>
   </body>
 </html>

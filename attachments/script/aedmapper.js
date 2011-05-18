@@ -39,8 +39,7 @@ function uploadWin(doc) {
   var email = "data" + plus + id + "@aedmapper.com";
   $('#email-address').text(email);
   $('#email-link').attr('href', "mailto:" + email).css('-webkit-user-select', 'text');
-  $('.ui-content').append('<a class="dialog" href="#email" data-rel="dialog"></a>');
-  $('.dialog').click().remove();
+  
 }
 
 function centerGeoJson() {
@@ -188,6 +187,18 @@ $(function() {
       })      
     }
   };
+  
+  $('.closeDialog').click(function(e) {
+    $('.detailsDialog').hide();
+    e.preventDefault();
+    return false;
+  })
+  
+  $('.saveButton').click(function(e) {
+    $('.detailsDialog').show();
+    uploadLocation();
+    e.preventDefault();
+  })
 
   app.s = $.sammy(function () {
     this.get("#:route", app.handler);

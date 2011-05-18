@@ -27,3 +27,5 @@
 .left   {top: 85px; left: 15px; width: 50px}
 .right  {top: 85px; left: 185px; width: 50px}
 .bottom {top: 120px; left: 45px; height: 50px}
+.detailsDialog {display: none;}
+div[data-role="page"]{display: block} !important
