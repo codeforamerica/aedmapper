@@ -208,6 +208,7 @@ $(function() {
   })
 
   app.s = $.sammy(function () {
+    this.get("#/:route", app.handler);
     this.get("#:route", app.handler);
     this.get("", app.handler);
   });
