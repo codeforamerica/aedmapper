@@ -26,7 +26,7 @@ config = YAML::load File.read(File.expand_path('~/.aedmapperrc'))
       else
         doc = {'_id' => JSON.parse(@couch.post(@couch_url.path, message.attributes.to_json).body)['id']}
       end
-      puts Mailer::AEDResponse.new(doc['_id'])
+      puts Mailer::AEDResponse.new(doc['_id']) if doc['_id']
     end
   end
 end
