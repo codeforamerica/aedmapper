@@ -2,7 +2,6 @@ require 'net/smtp'
 require 'mustache'
 require 'httparty'
 load 'smtp_api.rb'
-config = YAML::load File.read(File.expand_path('~/.aedmapperrc'))
 
 module Mailer
   class AEDResponse
@@ -25,6 +24,7 @@ module Mailer
     end
     
     def initialize(doc_id)
+      config = YAML::load File.read(File.expand_path('~/.aedmapperrc'))
       doc_url = config['couch_url'] + doc_id
       doc = JSON.parse(HTTParty.get(doc_url).body)
       raise "doc missing: #{doc}" if doc.keys.index {|key| key == "error"}
