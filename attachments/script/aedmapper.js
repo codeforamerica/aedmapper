@@ -142,7 +142,13 @@ function showMap(latitude, longitude) {
   });
 };
 
+function hideURLbar(f) {
+	if(window.innerHeight < (window.outerHeight+20)) { $('html').css({'min-height':(window.outerHeight+20)+'px'}); }
+	setTimeout(function() { if(window.pageYOffset<1||f) { window.scrollTo(0, 1); hideURLbar(); } }, 0);
+}
+
 $(function() {
+
   config = {
   	dbPrefix: '',
     db: "api", // relative vhost links defined in rewrites.json
@@ -186,6 +192,7 @@ $(function() {
         showMap(doc.geometry.coordinates[1], doc.geometry.coordinates[0]);
       })      
     }
+    hideURLbar()
   };
   
   $('.closeDialog').click(function(e) {

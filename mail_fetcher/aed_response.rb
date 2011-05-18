@@ -39,8 +39,8 @@ module Mailer
       map = "http://maps.google.com/maps/api/staticmap?center=#{location}&zoom=14&size=320x250&maptype=roadmap&markers=size:mid%7Ccolor:red%7C#{location}&sensor=false"
       subject = "AED Successfully Mapped!"
 
-      text = Mustache.render(File.read('aed_response.txt'), :map_url => map, :doc_url => doc_url, :subject => subject)
-      html = Mustache.render(File.read('aed_response.html'), :map_url => map, :doc_url => doc_url, :subject => subject)
+      text = Mustache.render(File.read('aed_response.txt'), :map_url => map, :doc_url => doc_url, :edit_url => edit_url, :subject => subject)
+      html = Mustache.render(File.read('aed_response.html'), :map_url => map, :doc_url => doc_url, :edit_url => edit_url, :subject => subject)
 
       header = "X-SMTPAPI: %s\n" %hdr.asJSON()
       mime =  create_mime(from, to, subject, text, html, header)
