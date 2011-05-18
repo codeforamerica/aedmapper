@@ -70,10 +70,11 @@ EOF
     end
         
     def to_geojson(exif)
+      lat_exif = exif.gps_latitude
       lon_exif = exif.gps_longitude
+      return "" unless lon_exif && lat_exif
       lon = to_decimal(lon_exif.map(&:to_f))
       lon = -lon if exif.gps_longitude_ref == "W"
-      lat_exif = exif.gps_latitude
       lat = to_decimal(lat_exif.map(&:to_f))
       lat = -lat if exif.gps_latitude_ref == "S"
       {
