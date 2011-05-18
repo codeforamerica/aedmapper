@@ -33,12 +33,12 @@
 		#map_canvas { height: 310px; width: 100%; margin: 0px; padding: 0px }
 		.crosshair {position: absolute; top: 120px; left: 0px;}
 		.left, .right, .top, .bottom {position: relative; background-color: #000; float: left;}
-		.left, .right {height: 10px; width: 60px;}
-		.top, .bottom {height: 60px; width: 10px;}
-		.top    {top: 0px; left: 155px;}
-		.left   {top: 85px; left: 0px;}
-		.right  {top: 85px; left: 180px;}
-		.bottom {top: 120px; left: 25px;}
+		.left, .right {height: 10px;}
+		.top, .bottom {width: 10px;}
+		.top    {top: 0px; left: 155px; height: 50px}
+		.left   {top: 85px; left: 15px; width: 50px}
+		.right  {top: 85px; left: 185px; width: 50px}
+		.bottom {top: 120px; left: 45px; height: 50px}
 	</style>
 	
 	<script src="script/jquery-1.4.3.min.js"></script>
@@ -170,9 +170,8 @@
     	directionsDisplay.setMap(map);
 
       var image = new google.maps.MarkerImage('images/marker.png',
-        new google.maps.Size(64, 31),
-        new google.maps.Point(0,0),
-        new google.maps.Point(16, 31)
+        new google.maps.Size(20,32),
+        new google.maps.Point(0,0)
       );
 
       var shadow = new google.maps.MarkerImage('images/shadow.png',
