@@ -38,6 +38,7 @@ module Mailer
       location = "#{doc['geometry']['coordinates'][1]},#{doc['geometry']['coordinates'][0]}"
       map = "http://maps.google.com/maps/api/staticmap?center=#{location}&zoom=14&size=320x250&maptype=roadmap&markers=size:mid%7Ccolor:red%7C#{location}&sensor=false"
       subject = "AED Successfully Mapped!"
+      edit_url = "http://aedmapper.com##{doc_id}"
 
       text = Mustache.render(File.read('aed_response.txt'), :map_url => map, :doc_url => doc_url, :edit_url => edit_url, :subject => subject)
       html = Mustache.render(File.read('aed_response.html'), :map_url => map, :doc_url => doc_url, :edit_url => edit_url, :subject => subject)
