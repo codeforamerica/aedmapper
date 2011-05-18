@@ -4,11 +4,8 @@ load 'aed_response.rb'
 require 'uri'
 
 # export AED_COUCH_URL="http://localhost:5984/mail/"
-@couch_url = URI.parse(ENV['AED_COUCH_URL'])
-config = {
-  'username' => ENV['AED_GMAIL_USER'],
-  'password' => ENV['AED_GMAIL_PASS']
-}
+config = YAML::load File.read(File.expand_path('~/.aedmapperrc'))
+@couch_url = URI.parse(config['couch_url'])
 
 @imap = Gmail::ImapClient.new(config)
 @couch = Couch::Server.new(@couch_url.host, @couch_url.port)
