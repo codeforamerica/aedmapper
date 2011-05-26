@@ -5,6 +5,7 @@ load 'smtp_api.rb'
 
 module Mailer
   class AEDResponse
+    
     # simple function to create a multipart MIME email
     # specify from to subject plaintext htmltext and an smtpapi header
     def create_mime(from, to, subject, text, html, header)
@@ -27,8 +28,10 @@ module Mailer
       config = YAML::load File.read(File.expand_path('~/.aedmapperrc'))
       doc_url = config['couch_url'] + doc_id
       doc = JSON.parse(HTTParty.get(doc_url).body)
+      
       return "doc missing: #{doc}" if doc.keys.index {|key| key == "error"}
       return "no geolocation -- skipping" unless doc['geometry']
+      
       # Specify that this is an initial contact message
       hdr = SMTPAPI.new()
       hdr.setCategory("initial")
