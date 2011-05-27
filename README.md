@@ -15,3 +15,5 @@ Work in progress -- more info soon
 ![Alt text](http://i.imgur.com/B3iZI.png)
 ![Alt text](http://i.imgur.com/dioXz.png)
 ![Alt text](http://i.imgur.com/XTIwG.png)
+
+[![Code for America Tracker](http://stats.codeforamerica.org/codeforamerica/aedmapper.png)](http://stats.codeforamerica.org/projects/aedmapper)
