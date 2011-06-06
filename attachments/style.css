@@ -78,8 +78,8 @@ div.block div.block-content {
   }
 
 #main {
-  float:left;
-  width:65%;
+  width: 550px;
+  margin: 0 auto;
   }
 
 #right {
