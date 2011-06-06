@@ -1,1 +1,0 @@
-hey {{map_url}} whats {{doc_url}} and {{subject}}

@@ -1,50 +1,126 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-  <head>
-	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"> 
-  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-  <title>AED Mapper</title>
-	<link rel="stylesheet"  href="style/jquery.mobile-1.0a4.1.min.css" />
-	<link rel="stylesheet"  href="style/style.css" />
-	<script src="script/jquery-1.6.1.min.js"></script>
-  <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-	<script src="script/sammy.js"></script>    
-	<script src="script/aedmapper.js"></script>    
-  </head>
-  <body class="ui-mobile-viewport">
-    <div data-role="page" data-theme="c" id="map" data-url="map" class="ui-page ui-body-c ui-page-active">		
-    	<div data-role="header" class="ui-bar-c ui-header" role="banner">
-    		<h1 class="ui-title" tabindex="0" role="heading" aria-level="1">AED Mapper</h1>
-    	</div>
-    	<div data-role="content" class="ui-content" role="main">	
-  			<div id="map_canvas"></div>
-  			<div class="crosshair">
-    			<div class="top"></div>
-    			<div class="right"></div>
-    			<div class="left"></div>
-    			<div class="bottom"></div>
-  			</div>
-        <a href="#" data-role="button" data-icon="delete" data-theme="c" class="saveButton ui-btn ui-btn-icon-left ui-btn-corner-all ui-shadow ui-btn-down-c ui-btn-hover-c">
-    		  <span class="ui-btn-inner ui-btn-corner-all">
-    		    <span class="ui-btn-text">Update Location</span>
-            <span class="ui-icon ui-icon-delete ui-icon-shadow"></span>
-          </span>
-        </a>
-    	</div>
-    </div>
+<!doctype html> 
+<!-- some form css came from the http://managingnews.com project. thanks doods! -->
+<!--[if lt IE 7 ]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>  <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>  <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head> 
+  <title>AED Submission Form</title>
+  <link href="reset.css" rel="stylesheet" type="text/css" />
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="core.css" rel="stylesheet" type="text/css" />
+  <link href="base.css" rel="stylesheet" type="text/css" />
+  <link href="designkit.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="leaflet.css" />
+  <!--[if lte IE 8]><link rel="stylesheet" href="leaflet.ie.css" /><![endif]-->
+  <script src="jquery.min.js" type="text/javascript"></script> 
+  <script src="jquery.mustache.js" type="text/javascript"></script> 
+  <script src="leaflet.js" type="text/javascript"></script> 
+  <script src="sammy.js" type="text/javascript"></script> 
+  <script src="util.js" type="text/javascript"></script> 
+  <script src="maphelper.js" type="text/javascript"></script> 
+  <script src="aedmapper.js" type="text/javascript"></script> 
+</head> 
+<body>
+  <div id="main">
 
-  	<div data-role="dialog" id="email" data-url="email" class="detailsDialog ui-dialog ui-page ui-body-a ui-page-active" role="dialog"> 
-    	<div data-role="header" data-theme="e" data-position="inline" class="ui-corner-top ui-overlay-shadow ui-bar-e ui-header" role="banner">
-    	  <a href="#" data-icon="delete" data-rel="back" data-iconpos="notext" class="closeDialog ui-btn-left ui-btn ui-btn-up-e ui-btn-icon-notext ui-btn-corner-all ui-shadow" title="Close" data-theme="e"><span class="ui-btn-inner ui-btn-corner-all">
-    	    <span class="ui-btn-text">Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span>
-    	  </a> 
-    		<h1 class="ui-title" tabindex="0" role="heading" aria-level="1">Success!</h1> 
-    	</div> 
-    	<div data-role="content" data-theme="e" class="ui-content ui-body-c ui-corner-bottom ui-overlay-shadow ui-body-e" role="main"> 
-      	<h1>AED Mapped!</h1> 
-  			<p>Thanks! Email more photos of the AED to:</p>
-  			<p><a id="email-link"><span id="email-address"></span></a></p>
-    	</div> 
-    </div>
-  </body>
+  </div>
+  <script id="homeTemplate" type="text/mustache">
+  	<div id="content" class="page-content clear-block">
+  		<div id="content-wrapper">
+  			<form action="#" accept-charset="UTF-8" method="post" id="node-form" enctype="multipart/form-data">
+  				<div>
+  					<div class="form form-layout-default clear-block">
+  						<div class="column-main">
+  							<div class="column-wrapper clear-block">
+  								<fieldset class=" fieldset titled collapsible collapsed tao-processed">
+  								  <div id="mapContainer">
+  							    </div>
+  							  </fieldset>
+  								<fieldset class=" fieldset titled collapsible collapsed tao-processed">
+  									<legend><span class="fieldset-title"><a href="#fieldset" class="active">AED Location</a></span></legend>
+  									<div class="fieldset-content clear-block ">
+  										<div class="form-item form-option" id="edit-revision-wrapper">
+  											<label for="edit-menu-link-title">Business Name</label>
+  											<input type="text" maxlength="128" name="menu[link_title]" id="edit-menu-link-title" value="" class="form-text fluid">
+  											<div class="description">
+  												What is the name of the Business or Building that the AED resides in?
+  											</div>
+  										</div>
+  										<div class="form-item form-item-labeled" id="edit-log-wrapper">
+  											<label for="edit-log">Location In Building</label>
+  											<div class="resizable-textarea">
+  												<span><textarea cols="60" rows="2" name="log" id="edit-log" class="form-textarea resizable textarea-processed"></textarea>
+  												<div class="grippie" style="margin-right: 0px; ">
+  												</div>
+  												</span>
+  											</div>
+  											<div class="description">
+  												Please be as specific as possible in describing where exactly in the building the AED is located.
+  											</div>
+  										</div>
+  										<div class="form-item form-option" id="edit-revision-wrapper">
+                      	<label class="option" for="edit-revision"><input type="checkbox" name="revision" id="edit-revision" value="1" class="form-checkbox"> Available 24/7 ?</label>
+                      </div>
+  									</div>
+  								</fieldset>
+  								<fieldset class="menu-item-form fieldset titled collapsible collapsed tao-processed">
+  									<legend><span class="fieldset-title"><a href="#fieldset" class="active">AED Details</a></span></legend>
+  									<div class="fieldset-content clear-block ">
+  										<div class="form-item form-item-labeled" id="edit-menu-link-title-wrapper">
+  											<label for="edit-menu-link-title">Manufacturer</label>
+  											<input type="text" maxlength="128" name="menu[link_title]" id="edit-menu-link-title" value="" class="form-text fluid">
+  											<div class="description">
+  												What is the name of the company that manufactured the AED?
+  											</div>
+  										</div>
+  										<div class="form-item form-item-labeled" id="edit-menu-link-title-wrapper">
+  											<label for="edit-menu-link-title">Model</label>
+  											<input type="text" maxlength="128" name="menu[link_title]" id="edit-menu-link-title" value="" class="form-text fluid">
+  											<div class="description">
+  												What is the make or model number of the AED?
+  											</div>
+  										</div>
+  										<div class="form-item form-item-labeled" id="edit-menu-link-title-wrapper">
+  											<label for="edit-menu-link-title">Serial Number</label>
+  											<input type="text" maxlength="128" name="menu[link_title]" id="edit-menu-link-title" value="" class="form-text fluid">
+  											<div class="description">
+  												Enter any serial number or other unique number found on the AED
+  											</div>
+  										</div>
+  										<div class="form-item form-item-labeled" id="edit-menu-link-title-wrapper">
+  											<label for="edit-menu-link-title">Battery Model</label>
+  											<input type="text" maxlength="128" name="menu[link_title]" id="edit-menu-link-title" value="" class="form-text fluid">
+  											<div class="description">
+  												What is the make or model of the battery that the AED uses?
+  											</div>
+  										</div>
+  										<div class="form-item form-item-labeled" id="edit-menu-link-title-wrapper">
+  											<label for="edit-menu-link-title">Electrode Model</label>
+  											<input type="text" maxlength="128" name="menu[link_title]" id="edit-menu-link-title" value="" class="form-text fluid">
+  											<div class="description">
+  												What is the make or model of the electrode that the AED uses?
+  											</div>
+  										</div>
+  									</div>
+  								</fieldset>
+  								<div class="buttons">
+  									<input type="submit" name="op" id="edit-submit-1" value="Save" class="form-submit">
+  								</div>
+  							</div>
+  						</div>
+  						<div class="column-side">
+  							<div class="column-wrapper clear-block">
+  								<div class="buttons">
+  									<input type="submit" name="op" id="edit-submit" value="Save" class="form-submit">
+  								</div>
+  							</div>
+  						</div>
+  					</div>
+  				</div>
+  			</form>
+  		</div>
+  	</div>
+  </script>
+</body>
 </html>

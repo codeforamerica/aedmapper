@@ -1,5 +1,0 @@
-source 'http://rubygems.org'
-gem "exifr"
-gem "mustache"
-gem "httparty"
-gem "mail"

@@ -31,6 +31,8 @@ div.block div.block-content {
   -moz-box-shadow:none;
   -webkit-box-shadow:none;
   }
+  
+#mapContainer { height: 250px }
 
 .growl .messages,
 .sidebar .block,
