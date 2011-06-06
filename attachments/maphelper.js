@@ -36,12 +36,25 @@ var mapHelper = function() {
       list.empty();
 
       $.each(results, function(i, val) {
-        list.append('<li data-icon="false">' + val.formatted_address + '</li>');
+        var lat = val.geometry.location.lat()
+          , lng = val.geometry.location.lng()
+        list.append('<li data-icon="false"><a data-lat="'+lat+'" data-lng="'+lng+'"class="menuOption">' + val.formatted_address + '</a></li>');
       });
+      
+      $('.menuOption').hover(
+        function(e) { $(e.target).addClass('menuHover')}
+       ,function(e) { $(e.target).removeClass('menuHover')}
+      );
 
-      $('li', list).click(function() {
-        input.val(this.innerHTML);
+      $('li', list).click(function(e) {
         list.empty();
+        var loc = $(e.target);
+        $('.map-fieldset').hide();
+        $('#map').show();        
+        map.invalidateSize();          
+        var lat = parseFloat(loc.attr('data-lat'))
+          , lng = parseFloat(loc.attr('data-lng'))
+        map.setView(new L.LatLng(lat, lng), 16);
       });
     };
 

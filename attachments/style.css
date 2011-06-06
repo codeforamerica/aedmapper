@@ -34,10 +34,59 @@ div.block div.block-content {
   
 #map { height: 250px; display: none }
 .locationContainer { height: 250px }
-.inline-button-form-item { float: left; width: 66% }
-.inline-button-submit { float: right; width: 32%; position: relative; top: 25px}
 .map-fieldset {height: 200px}
 
+ul.optionsMenu {
+  -webkit-box-shadow: 3px 3px 8px #555;
+  -moz-box-shadow: 3px 3px 8px #555;
+  box-shadow: 3px 3px 8px #555;
+  outline-style: none;
+  background: white;
+  color: black;
+  font-size: 0.85em;
+  height: auto;
+  left: 0;
+  list-style: none;
+  overflow: hidden;
+  position: relative;
+  text-align: left;
+  top: -5px;
+  left: 5px;
+  max-width: 480px;
+  z-index: 666; }
+  ul.optionsMenu {
+    margin: 0; padding: 0}
+  ul.optionsMenu * {
+    margin: 0;
+    padding: 0; }
+  ul.optionsMenu a {
+    color: black;
+    display: block;
+    text-decoration: none; }
+  ul.optionsMenu li {
+    border-top: 1px solid #4e647d;
+    background: #0A5469;
+    height: 29px; }
+    ul.optionsMenu li .menuHover {
+      background: #fffee5;
+      color: black;
+      cursor: default; }
+    ul.optionsMenu li .optionsMenuSelFocus {
+      background-position: auto; }
+    ul.optionsMenu li .optionsMenuSelFocus {
+      cursor: default; }
+    ul.optionsMenu li a {
+      outline-style: none;
+      font-weight: lighter;
+      font-size: 14px;
+      height: 29px;
+      line-height: 27px;
+      color: white;
+      display: block;
+      padding-left: 10px; }
+      ul.optionsMenu li a:focus {
+        -moz-outline-style: none; }
+        
 .growl .messages,
 .sidebar .block,
 .page-content .node,
