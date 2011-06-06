@@ -23,7 +23,20 @@ var util = function() {
     }
     return exists;
   }
+  
+  // simple debounce adapted from underscore.js
+  function delay(func, wait) {
+    return function() {
+      var context = this, args = arguments;
+      var throttler = function() {
+        delete app.timeout;
+        func.apply(context, args);
+      };
+      if (!app.timeout) app.timeout = setTimeout(throttler, wait);      
+    };
+  };
 
+  // requires jquery.mustache.js
   function render( template, target, options ) {
     if ( ! options ) options = {data: {}};
     var html = $.mustache( $( "#" + template + "Template" ).html(), options.data ),
@@ -74,6 +87,7 @@ var util = function() {
   
   return {
     inURL: inURL,
+    delay: delay,
     render: render,
     formatMetadata:formatMetadata,
     getBaseURL:getBaseURL

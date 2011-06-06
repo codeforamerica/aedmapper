@@ -32,7 +32,11 @@ div.block div.block-content {
   -webkit-box-shadow:none;
   }
   
-#mapContainer { height: 250px }
+#map { height: 250px; display: none }
+.locationContainer { height: 250px }
+.inline-button-form-item { float: left; width: 66% }
+.inline-button-submit { float: right; width: 32%; position: relative; top: 25px}
+.map-fieldset {height: 200px}
 
 .growl .messages,
 .sidebar .block,

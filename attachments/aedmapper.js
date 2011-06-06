@@ -17,7 +17,13 @@ app.handler = function(route) {
 
 app.after = {
   home: function() {
-    mapHelper.createMap(app.config);
+    app.map = mapHelper.createMap(app.config);
+    $('#address').keyup(function() {
+      util.delay(function() {
+        app.map.geocoder.geocode({'address':$('#address').val()}, app.map.listAddresses);
+      }, 2000)();
+    });
+    
     $('.saveButton').click(function(e) {
       e.preventDefault();
     })

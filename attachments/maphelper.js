@@ -3,7 +3,7 @@ var mapHelper = function() {
   function createMap(config) {
     
     config = $.extend({
-      containerId: 'mapContainer',
+      containerId: 'map',
       mapCenterLat: 45.5234515,
     	mapCenterLon: -122.6762071,
     	mapStartZoom: 2,
@@ -29,12 +29,29 @@ var mapHelper = function() {
     
     map.setView(new L.LatLng(config.mapCenterLat, config.mapCenterLon), config.mapStartZoom).addLayer(cloudmade);
 
+    function listAddresses(results, status) {
+      var list = $('#address-list'),
+          input = $('#address');
+          
+      list.empty();
+
+      $.each(results, function(i, val) {
+        list.append('<li data-icon="false">' + val.formatted_address + '</li>');
+      });
+
+      $('li', list).click(function() {
+        input.val(this.innerHTML);
+        list.empty();
+      });
+    };
+
     return {
       instance: map,
       container: container,
       config: config,
       markerDot: new MarkerDot(),
       uri: "/" + encodeURIComponent(name) + "/",
+      geocoder: new google.maps.Geocoder(),
       
       showLoader: function() {
         $('.map_header', this.container).first().addClass('loading');
@@ -43,6 +60,8 @@ var mapHelper = function() {
       hideLoader: function() {
         $('.map_header', this.container).first().removeClass('loading');
       },
+            
+      listAddresses: listAddresses,
 
       showPoint: function(feature) {
         var point = feature.geometry,
