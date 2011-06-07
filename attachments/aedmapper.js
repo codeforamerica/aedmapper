@@ -26,12 +26,16 @@ app.after = {
     });
     
     $('#aed-form').submit(function(e) {
+      if (!app.map.lastCoordinates) {
+        alert('Please enter an address first');
+        return;
+      }
       var data = $('#aed-form').serializeObject();
       _.map(_.keys(data), function(key) {
         if (data[key] === "") delete data[key];
       })
       $.extend(data, {"created_at": new Date()});
-      console.log(data)
+      if (app.map.lastCoordinates) $.extend(data, {"geometry": {"type": "Point", "coordinates": app.map.lastCoordinates}});
       var reqOpts = {
         uri: app.config.baseURL + "/api",
         method: "POST",

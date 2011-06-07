@@ -54,7 +54,7 @@ var mapHelper = function() {
         $('#map-wrapper').show();
         
         app.map.instance.on('move', function() {
-          // $('#loc').html(app.map.instance.getCenter().lat);
+          app.map.lastCoordinates = [app.map.instance.getCenter().lng, app.map.instance.getCenter().lat];
         });
              
         map.invalidateSize();          
