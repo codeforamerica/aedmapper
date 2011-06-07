@@ -32,11 +32,12 @@ div.block div.block-content {
   -webkit-box-shadow:none;
   }
   
-#map { height: 200px; display: none; margin: 10px 5px;}
-.locationContainer { height: 320px }
-.map-fieldset {height: 270px}
+#map { height: 200px;}
+#map-wrapper {display: none;}
+.locationContainer { height: 335px }
+.map-fieldset {height: 285px}
 
-.crosshair {display: none; position: absolute; top: 115px; left: 95px;}
+.crosshair {z-index: 666; display: none; position: absolute; top: 35px; left: 95px;}
 .left, .right, .top, .bottom {position: relative; background-color: #000; float: left;}
 .left, .right {height: 10px; width: 60px;}
 .top, .bottom {height: 60px; width: 10px;}

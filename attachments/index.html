@@ -29,107 +29,114 @@
 
   </div>
   <script id="homeTemplate" type="text/mustache">
-  	<div id="content" class="page-content clear-block">
-  		<div id="content-wrapper">
-  			<form action="#" accept-charset="UTF-8" method="post" id="node-form" enctype="multipart/form-data">
-  				<div>
-  					<div class="form form-layout-default clear-block">
-							<div class="column-wrapper clear-block">
-								<fieldset class="locationContainer fieldset titled collapsible collapsed tao-processed">
+    <div id="content" class="page-content clear-block">
+      <div id="content-wrapper">
+        <form action="#" accept-charset="UTF-8" method="post" id="node-form" enctype="multipart/form-data">
+          <div>
+            <div class="form form-layout-default clear-block">
+              <div class="column-wrapper clear-block">
+                <fieldset class="locationContainer fieldset titled collapsible collapsed tao-processed">
                   <legend><span class="fieldset-title"><a href="#fieldset" class="active">AED Location</a></span></legend>
-									<div class="fieldset-content map-fieldset clear-block ">
-										<div class="inline-button-form-item form-item form-option" id="edit-revision-wrapper">
-											<label for="edit-menu-link-title">Building Street Address</label>
-											<input type="text" maxlength="128" name="menu[link_title]" id="address" value="" class="form-text fluid">
-											<div class="description">
-												What is the street address of the building that the AED resides in? e.g. 85 2nd St, San Francisco, CA
-											</div>
-										</div>
-										<ul id="address-list" class="optionsMenu address-list" data-role="listview" data-inset="true" data-theme="c"></ul>
-										<div id="map"></div>
-  							    <div class="crosshair">
-                		<div class="top"></div>
-              			<div class="right"></div>
-              			<div class="left"></div>
-              			<div class="bottom"></div>
-									</div>
-							  </fieldset>
-								<fieldset class="fieldset titled collapsible collapsed tao-processed">
-									<legend><span class="fieldset-title"><a href="#fieldset" class="active">Building Details</a></span></legend>
-									<div class="fieldset-content clear-block ">
-										<div class="form-item form-option" id="edit-revision-wrapper">
-											<label for="edit-menu-link-title">Business Name</label>
-											<input type="text" maxlength="128" name="menu[link_title]" id="edit-menu-link-title" value="" class="form-text fluid">
-											<div class="description">
-												What is the name of the Business or Building that the AED resides in?
-											</div>
-										</div>
-										<div class="form-item form-item-labeled" id="edit-log-wrapper">
-											<label for="edit-log">Location In Building</label>
-											<div class="resizable-textarea">
-												<span><textarea cols="60" rows="2" name="log" id="edit-log" class="form-textarea resizable textarea-processed"></textarea>
-												<div class="grippie" style="margin-right: 0px; ">
-												</div>
-												</span>
-											</div>
-											<div class="description">
-												Please be as specific as possible in describing where exactly in the building the AED is located.
-											</div>
-										</div>
-										<div class="form-item form-option" id="edit-revision-wrapper">
-                    	<label class="option" for="edit-revision"><input type="checkbox" name="revision" id="edit-revision" value="1" class="form-checkbox"> Available 24/7 ?</label>
+                  <div class="fieldset-content map-fieldset clear-block ">
+                    <div class="inline-button-form-item form-item form-option" id="edit-revision-wrapper">
+                      <label for="edit-menu-link-title">Building Street Address</label>
+                      <input type="text" maxlength="128" name="menu[link_title]" id="address" value="" class="form-text fluid">
+                      <div class="description">
+                        What is the street address of the building that the AED resides in? e.g. 85 2nd St, San Francisco, CA
+                      </div>
                     </div>
-									</div>
-								</fieldset>
-								<fieldset class="menu-item-form fieldset titled collapsible collapsed tao-processed">
-									<legend><span class="fieldset-title"><a href="#fieldset" class="active">AED Details</a></span></legend>
-									<div class="fieldset-content clear-block ">
-										<div class="form-item form-item-labeled" id="edit-menu-link-title-wrapper">
-											<label for="edit-menu-link-title">Manufacturer</label>
-											<input type="text" maxlength="128" name="menu[link_title]" id="edit-menu-link-title" value="" class="form-text fluid">
-											<div class="description">
-												What is the name of the company that manufactured the AED?
-											</div>
-										</div>
-										<div class="form-item form-item-labeled" id="edit-menu-link-title-wrapper">
-											<label for="edit-menu-link-title">Model</label>
-											<input type="text" maxlength="128" name="menu[link_title]" id="edit-menu-link-title" value="" class="form-text fluid">
-											<div class="description">
-												What is the make or model number of the AED?
-											</div>
-										</div>
-										<div class="form-item form-item-labeled" id="edit-menu-link-title-wrapper">
-											<label for="edit-menu-link-title">Serial Number</label>
-											<input type="text" maxlength="128" name="menu[link_title]" id="edit-menu-link-title" value="" class="form-text fluid">
-											<div class="description">
-												Enter any serial number or other unique number found on the AED
-											</div>
-										</div>
-										<div class="form-item form-item-labeled" id="edit-menu-link-title-wrapper">
-											<label for="edit-menu-link-title">Battery Model</label>
-											<input type="text" maxlength="128" name="menu[link_title]" id="edit-menu-link-title" value="" class="form-text fluid">
-											<div class="description">
-												What is the make or model of the battery that the AED uses?
-											</div>
-										</div>
-										<div class="form-item form-item-labeled" id="edit-menu-link-title-wrapper">
-											<label for="edit-menu-link-title">Electrode Model</label>
-											<input type="text" maxlength="128" name="menu[link_title]" id="edit-menu-link-title" value="" class="form-text fluid">
-											<div class="description">
-												What is the make or model of the electrode that the AED uses?
-											</div>
-										</div>
-									</div>
-								</fieldset>
-								<div class="buttons">
-									<input type="submit" name="op" id="edit-submit-1" value="Save" class="form-submit">
-								</div>
-							</div>
-  					</div>
-  				</div>
-  			</form>
-  		</div>
-  	</div>
+                    <ul id="address-list" class="optionsMenu address-list" data-role="listview" data-inset="true" data-theme="c"></ul>
+                    <div class="inline-button-form-item form-item form-option" id="map-wrapper">
+                      <label for="edit-menu-link-title">Drag To Pinpoint Location</label>
+                      <div id="map"></div>
+                      <div class="crosshair">
+                      <div class="top"></div>
+                      <div class="right"></div>
+                      <div class="left"></div>
+                      <div class="bottom"></div>
+                      <div class="description">
+                        What is the street address of the building that the AED resides in? e.g. 85 2nd St, San Francisco, CA
+                      </div>
+                    </div>
+                    
+                  </div>
+                </fieldset>
+                <fieldset class="fieldset titled collapsible collapsed tao-processed">
+                  <legend><span class="fieldset-title"><a href="#fieldset" class="active">Building Details</a></span></legend>
+                  <div class="fieldset-content clear-block ">
+                    <div class="form-item form-option" id="edit-revision-wrapper">
+                      <label for="edit-menu-link-title">Business Name</label>
+                      <input type="text" maxlength="128" name="menu[link_title]" id="edit-menu-link-title" value="" class="form-text fluid">
+                      <div class="description">
+                        What is the name of the Business or Building that the AED resides in?
+                      </div>
+                    </div>
+                    <div class="form-item form-item-labeled" id="edit-log-wrapper">
+                      <label for="edit-log">Location In Building</label>
+                      <div class="resizable-textarea">
+                        <span><textarea cols="60" rows="2" name="log" id="edit-log" class="form-textarea resizable textarea-processed"></textarea>
+                        <div class="grippie" style="margin-right: 0px; ">
+                        </div>
+                        </span>
+                      </div>
+                      <div class="description">
+                        Please be as specific as possible in describing where exactly in the building the AED is located.
+                      </div>
+                    </div>
+                    <div class="form-item form-option" id="edit-revision-wrapper">
+                      <label class="option" for="edit-revision"><input type="checkbox" name="revision" id="edit-revision" value="1" class="form-checkbox"> Available 24/7 ?</label>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="menu-item-form fieldset titled collapsible collapsed tao-processed">
+                  <legend><span class="fieldset-title"><a href="#fieldset" class="active">AED Details</a></span></legend>
+                  <div class="fieldset-content clear-block ">
+                    <div class="form-item form-item-labeled" id="edit-menu-link-title-wrapper">
+                      <label for="edit-menu-link-title">Manufacturer</label>
+                      <input type="text" maxlength="128" name="menu[link_title]" id="edit-menu-link-title" value="" class="form-text fluid">
+                      <div class="description">
+                        What is the name of the company that manufactured the AED?
+                      </div>
+                    </div>
+                    <div class="form-item form-item-labeled" id="edit-menu-link-title-wrapper">
+                      <label for="edit-menu-link-title">Model</label>
+                      <input type="text" maxlength="128" name="menu[link_title]" id="edit-menu-link-title" value="" class="form-text fluid">
+                      <div class="description">
+                        What is the make or model number of the AED?
+                      </div>
+                    </div>
+                    <div class="form-item form-item-labeled" id="edit-menu-link-title-wrapper">
+                      <label for="edit-menu-link-title">Serial Number</label>
+                      <input type="text" maxlength="128" name="menu[link_title]" id="edit-menu-link-title" value="" class="form-text fluid">
+                      <div class="description">
+                        Enter any serial number or other unique number found on the AED
+                      </div>
+                    </div>
+                    <div class="form-item form-item-labeled" id="edit-menu-link-title-wrapper">
+                      <label for="edit-menu-link-title">Battery Model</label>
+                      <input type="text" maxlength="128" name="menu[link_title]" id="edit-menu-link-title" value="" class="form-text fluid">
+                      <div class="description">
+                        What is the make or model of the battery that the AED uses?
+                      </div>
+                    </div>
+                    <div class="form-item form-item-labeled" id="edit-menu-link-title-wrapper">
+                      <label for="edit-menu-link-title">Electrode Model</label>
+                      <input type="text" maxlength="128" name="menu[link_title]" id="edit-menu-link-title" value="" class="form-text fluid">
+                      <div class="description">
+                        What is the make or model of the electrode that the AED uses?
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <div class="buttons">
+                  <input type="submit" name="op" id="edit-submit-1" value="Submit" class="form-submit">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   </script>
 </body>
 </html>

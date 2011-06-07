@@ -51,7 +51,7 @@ var mapHelper = function() {
         var loc = $(e.target);
         $('#address').val(loc.text());
         $('.crosshair').show();
-        $('#map').show();
+        $('#map-wrapper').show();
         
         app.map.instance.on('move', function() {
           // $('#loc').html(app.map.instance.getCenter().lat);
