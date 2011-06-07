@@ -26,15 +26,22 @@ app.after = {
     });
     
     $('#aed-form').submit(function(e) {
+      var data = $('#aed-form').serializeObject();
+      _.map(_.keys(data), function(key) {
+        if (data[key] === "") delete data[key];
+      })
+      $.extend(data, {"created_at": new Date()});
+      console.log(data)
       var reqOpts = {
         uri: app.config.baseURL + "/api",
         method: "POST",
         headers: {"Content-type": "application/json"},
-        body: JSON.stringify($('#aed-form').serializeObject())
+        body: JSON.stringify(data)
       }
       $.request(reqOpts, function(err, resp, body) {
         window.location = "";
         window.scrollTo(0, 0);
+        alert('Thanks! Your AED was successfully added');
       })
       e.preventDefault();
     })
