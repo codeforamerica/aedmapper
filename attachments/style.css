@@ -32,9 +32,18 @@ div.block div.block-content {
   -webkit-box-shadow:none;
   }
   
-#map { height: 250px; display: none }
-.locationContainer { height: 250px }
-.map-fieldset {height: 200px}
+#map { height: 200px; display: none; margin: 10px 5px;}
+.locationContainer { height: 320px }
+.map-fieldset {height: 270px}
+
+.crosshair {display: none; position: absolute; top: 115px; left: 95px;}
+.left, .right, .top, .bottom {position: relative; background-color: #000; float: left;}
+.left, .right {height: 10px; width: 60px;}
+.top, .bottom {height: 60px; width: 10px;}
+.top    {top: 0px; left: 155px;}
+.left   {top: 85px; left: 0px;}
+.right  {top: 85px; left: 180px;}
+.bottom {top: 120px; left: 25px;}
 
 ul.optionsMenu {
   -webkit-box-shadow: 3px 3px 8px #555;

@@ -13,7 +13,7 @@ var mapHelper = function() {
     var container = $('#' + config.containerId);
     
     var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/d3394c6c242a4f26bb7dd4f7e132e5ff/37608/256/{z}/{x}/{y}.png',
-  	    cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors',
+  	    cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap',
   	    cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution});
   	    
     var MarkerDot = L.Icon.extend({
@@ -49,8 +49,14 @@ var mapHelper = function() {
       $('li', list).click(function(e) {
         list.empty();
         var loc = $(e.target);
-        $('.map-fieldset').hide();
-        $('#map').show();        
+        $('#address').val(loc.text());
+        $('.crosshair').show();
+        $('#map').show();
+        
+        app.map.instance.on('move', function() {
+          // $('#loc').html(app.map.instance.getCenter().lat);
+        });
+             
         map.invalidateSize();          
         var lat = parseFloat(loc.attr('data-lat'))
           , lng = parseFloat(loc.attr('data-lng'))
