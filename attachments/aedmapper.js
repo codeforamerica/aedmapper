@@ -20,33 +20,40 @@ app.after = {
     app.map = mapHelper.createMap(app.config);
 
     $('#address').keyup(function() {
+      $('#address').addClass('loading');
       util.delay(function() {
         app.map.geocoder.geocode({'address':$('#address').val()}, app.map.listAddresses);
       }, 2000)();
     });
     
     $('#aed-form').submit(function(e) {
+      
       if (!app.map.lastCoordinates) {
         alert('Please enter an address first');
         return;
       }
+      
       var data = $('#aed-form').serializeObject();
       _.map(_.keys(data), function(key) {
         if (data[key] === "") delete data[key];
       })
+      
       $.extend(data, {"created_at": new Date()});
       if (app.map.lastCoordinates) $.extend(data, {"geometry": {"type": "Point", "coordinates": app.map.lastCoordinates}});
+
       var reqOpts = {
         uri: app.config.baseURL + "/api",
         method: "POST",
         headers: {"Content-type": "application/json"},
         body: JSON.stringify(data)
       }
+      
       $.request(reqOpts, function(err, resp, body) {
         window.location = "";
         window.scrollTo(0, 0);
         alert('Thanks! Your AED was successfully added');
       })
+      
       e.preventDefault();
     })
   }

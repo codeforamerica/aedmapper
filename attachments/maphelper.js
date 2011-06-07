@@ -30,6 +30,8 @@ var mapHelper = function() {
     map.setView(new L.LatLng(config.mapCenterLat, config.mapCenterLon), config.mapStartZoom).addLayer(cloudmade);
 
     function listAddresses(results, status) {
+      $('#address').removeClass('loading');
+      
       var list = $('#address-list'),
           input = $('#address');
           
