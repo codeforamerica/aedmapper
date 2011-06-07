@@ -25,7 +25,17 @@ app.after = {
       }, 2000)();
     });
     
-    $('.saveButton').click(function(e) {
+    $('#aed-form').submit(function(e) {
+      var reqOpts = {
+        uri: app.config.baseURL + "/api",
+        method: "POST",
+        headers: {"Content-type": "application/json"},
+        body: JSON.stringify($('#aed-form').serializeObject())
+      }
+      $.request(reqOpts, function(err, resp, body) {
+        window.location = "";
+        window.scrollTo(0, 0);
+      })
       e.preventDefault();
     })
   }
