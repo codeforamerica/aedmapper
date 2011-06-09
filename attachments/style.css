@@ -31,7 +31,7 @@ div.block div.block-content {
   -moz-box-shadow:none;
   -webkit-box-shadow:none;
   }
-  
+
 #map { height: 200px;}
 #map-wrapper {display: none;}
 .locationContainer { height: 335px }
@@ -40,7 +40,7 @@ div.block div.block-content {
 #title p { float: right}
 #address.loading {background-image:url(http://fbi.gov/spinner.gif); background-repeat: no-repeat; background-position: 99% center;}
 
-.crosshair {z-index: 666; display: none; position: absolute; top: 35px; left: 95px;}
+.crosshair {z-index: 666; display: none; position: absolute; top: 35px; left: 75px;}
 .left, .right, .top, .bottom {position: relative; background-color: #000; float: left;}
 .left, .right {height: 10px; width: 60px;}
 .top, .bottom {height: 60px; width: 10px;}
@@ -64,11 +64,10 @@ ul.optionsMenu {
   position: relative;
   text-align: left;
   top: -5px;
-  left: 5px;
   max-width: 480px;
   z-index: 666; }
   ul.optionsMenu {
-    margin: 0; padding: 0}
+    margin: 0 5px; padding: 0}
   ul.optionsMenu * {
     margin: 0;
     padding: 0; }
@@ -108,7 +107,7 @@ ul.optionsMenu {
 .page-content div.view-empty,
 .page-content .view-content .item-list,
 .page-content .view-content table,
-.page-content #content-wrapper > form {
+.page-content #content-wrapper {
   -moz-box-shadow:#999 0px 0px 3px;
   -webkit-box-shadow:#999 0px 1px 3px;
   }
@@ -121,7 +120,7 @@ ul.optionsMenu {
 .page-content div.view-empty,
 .page-content .view-content .item-list,
 .page-content .view-content table,
-.page-content #content-wrapper > form {
+.page-content #content-wrapper {
   border:0px;
   -moz-border-radius:5px;
   -webkit-border-radius:5px;
@@ -144,7 +143,7 @@ ul.optionsMenu {
   }
 
 #main {
-  width: 550px;
+  width: 800px;
   margin: 0 auto;
   }
 
@@ -870,7 +869,7 @@ div.navbar div.context-links a:hover { background:#fff; }
  */
 div.sidebar { padding:10px 10px 10px 0px; }
 
-.page-content #content-wrapper > form,
+.page-content #content-wrapper,
 div.page-content div.block,
 div.sidebar div.block,
 #palette .block-toggle {
@@ -878,7 +877,7 @@ div.sidebar div.block,
   margin:0px 0px 10px;
   }
 
-  .page-content #content-wrapper > form,
+  .page-content #content-wrapper,
   div.admin-panel,
   div.sidebar .block .block-content,
   div.page-content .block .block-content { padding:10px; }

@@ -26,6 +26,8 @@ app.after = {
       }, 2000)();
     });
     
+    util.bindUpload($('#file_upload'));
+    
     $('#aed-form').submit(function(e) {
       
       if (!app.map.lastCoordinates) {

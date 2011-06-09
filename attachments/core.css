@@ -463,14 +463,14 @@ select.form-select {
 .column-main {
   float:left;
   width:65%;
-  }
+}
 
   .column-main .column-wrapper { padding-right:10px; }
 
 .column-side {
   float:right;
   width:34.99%;
-  }
+}
 
   .column-side .column-wrapper { padding-left:10px; }
 

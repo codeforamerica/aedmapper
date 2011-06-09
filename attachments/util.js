@@ -85,11 +85,72 @@ var util = function() {
     return baseURL;
   }
   
+  function bindUpload(form) {
+    docURL = {};
+    currentFileName = {};
+    uploadSequence = [];
+
+    $.getJSON( '/_uuids', function( data ) { 
+      docURL = app.config.baseURL + "api/" + data.uuids[ 0 ] + "/";
+    });
+
+    $( '.file_list' ).html( "" );
+
+    var uploadSequence = [];
+    uploadSequence.start = function (index, fileName, rev) {
+      var next = this[index];
+      currentFileName = fileName;
+      var url = docURL + fileName;
+      if ( rev ) url = url + "?rev=" + rev;
+      next(url);
+      this[index] = null;
+    };
+
+    form.fileUploadUI({
+      multipart: false,
+      uploadTable: $( '.file_list' ),
+      downloadTable: $( '.file_list' ),
+      buildUploadRow: function ( files, index ) {
+        return $( $.mustache( $( '#uploaderTemplate' ).text(), { name: files[ index ].name } ));
+      },
+      buildDownloadRow: function ( file ) {
+        return $( '<tr><td>' + currentFileName + '<\/td><\/tr>' );
+      },
+      beforeSend: function (event, files, index, xhr, handler, callBack) {
+        uploadSequence.push(function (url) {
+          handler.url = url;
+          callBack();
+        });
+        if (index === 0) {
+          uploadSequence.splice(0, uploadSequence.length - 1);
+        }
+        if (index + 1 === files.length) {
+          uploadSequence.start(0, files[ index ].fileName);
+        }
+      },
+      onComplete: function (event, files, index, xhr, handler) {
+        app.currentDoc = handler.response;
+        var nextUpload = uploadSequence[ index + 1 ];
+        if ( nextUpload ) {
+          uploadSequence.start( index + 1, files[ index ].fileName, app.currentDoc.rev );
+        } else {
+          console.log('win', app.currentDoc);
+        }
+      },
+      onAbort: function (event, files, index, xhr, handler) {
+        handler.removeNode(handler.uploadRow);
+        uploadSequence[index] = null;
+        uploadSequence.start(index + 1, handler.url);
+      }
+    });
+  }
+  
   return {
     inURL: inURL,
     delay: delay,
     render: render,
     formatMetadata:formatMetadata,
-    getBaseURL:getBaseURL
+    getBaseURL:getBaseURL,
+    bindUpload: bindUpload
   };
 }();
