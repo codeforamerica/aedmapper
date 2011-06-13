@@ -86,22 +86,21 @@ var util = function() {
   }
   
   function bindUpload(form) {
-    docURL = {};
     currentFileName = {};
     uploadSequence = [];
 
     $.getJSON( '/_uuids', function( data ) { 
-      docURL = app.config.baseURL + "api/" + data.uuids[ 0 ] + "/";
+      app.docURL = app.config.baseURL + "api/" + data.uuids[ 0 ] + "/";
     });
 
     $( '.file_list' ).html( "" );
 
     var uploadSequence = [];
-    uploadSequence.start = function (index, fileName, rev) {
+    uploadSequence.start = function (index, fileName) {
       var next = this[index];
       currentFileName = fileName;
-      var url = docURL + fileName;
-      if ( rev ) url = url + "?rev=" + rev;
+      var url = app.docURL + fileName;
+      if (app.currentDoc && app.currentDoc.rev) url = url + "?rev=" + app.currentDoc.rev;
       next(url);
       this[index] = null;
     };
@@ -129,12 +128,17 @@ var util = function() {
         }
       },
       onComplete: function (event, files, index, xhr, handler) {
-        app.currentDoc = handler.response;
         var nextUpload = uploadSequence[ index + 1 ];
         if ( nextUpload ) {
-          uploadSequence.start( index + 1, files[ index ].fileName, app.currentDoc.rev );
+          uploadSequence.start( index + 1, files[ index ].fileName);
         } else {
-          console.log('win', app.currentDoc);
+          var reqOpts = {
+            uri: app.config.baseURL + "api/" + handler.response.id,
+            headers: {"Content-type": "application/json"}
+          }
+          $.request(reqOpts, function(err, resp, body) {
+            app.currentDoc = JSON.parse(body);
+          })
         }
       },
       onAbort: function (event, files, index, xhr, handler) {

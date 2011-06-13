@@ -44,12 +44,20 @@ app.after = {
       if (app.map.lastCoordinates) $.extend(data, {"geometry": {"type": "Point", "coordinates": app.map.lastCoordinates}});
 
       var reqOpts = {
-        uri: app.config.baseURL + "/api",
+        uri: app.config.baseURL + "api",
         method: "POST",
-        headers: {"Content-type": "application/json"},
-        body: JSON.stringify(data)
+        headers: {"Content-type": "application/json"}
       }
       
+      if (app.currentDoc) {
+        $.extend(reqOpts, {
+          uri: app.config.baseURL + "api/" + app.currentDoc._id,
+          method: "PUT"
+        })
+        $.extend(data, {"_rev": app.currentDoc._rev, "_attachments": app.currentDoc._attachments});
+      }
+      
+      reqOpts.body = JSON.stringify(data);
       $.request(reqOpts, function(err, resp, body) {
         window.location = "";
         window.scrollTo(0, 0);
@@ -71,20 +79,3 @@ $(function() {
 
   app.s.run();
 });
-
-// function uploadLocation() {
-//   var req = {
-//     url: config.couchUrl + "api",
-//     type: "POST",
-//     contentType: "application/json",
-//     data: {}
-//   }
-//   if (currentDoc) {
-//     $.extend(req, {
-//       url: config.couchUrl + "api/" + currentDoc._id,
-//       type: "PUT",
-//       data: JSON.stringify($.extend(currentDoc, centerGeoJson()))
-//     })
-//   }
-//   $.ajax(req);
-// }
