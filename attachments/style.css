@@ -49,6 +49,9 @@ div.block div.block-content {
 .right  {top: 85px; left: 180px;}
 .bottom {top: 120px; left: 25px;}
 
+.column-side .fieldset-title { position: relative; }
+.column-side .fieldset-title a {color: #666674;}
+
 ul.optionsMenu {
   -webkit-box-shadow: 3px 3px 8px #555;
   -moz-box-shadow: 3px 3px 8px #555;

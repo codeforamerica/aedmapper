@@ -113,7 +113,7 @@ var util = function() {
         return $( $.mustache( $( '#uploaderTemplate' ).text(), { name: files[ index ].name } ));
       },
       buildDownloadRow: function ( file ) {
-        return $( '<tr><td>' + currentFileName + '<\/td><\/tr>' );
+        return $( '<tr><td>' + currentFileName + '<\/td><td></td>\/tr>' );
       },
       beforeSend: function (event, files, index, xhr, handler, callBack) {
         uploadSequence.push(function (url) {
