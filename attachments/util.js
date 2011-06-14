@@ -96,11 +96,12 @@ var util = function() {
     $( '.file_list' ).html( "" );
 
     var uploadSequence = [];
-    uploadSequence.start = function (index, fileName) {
+    uploadSequence.start = function (index, fileName, rev) {
       var next = this[index];
       currentFileName = fileName;
       var url = app.docURL + fileName;
-      if (app.currentDoc && app.currentDoc.rev) url = url + "?rev=" + app.currentDoc.rev;
+      if (!rev && app.currentDoc && app.currentDoc._rev) var rev = app.currentDoc._rev;
+      if (rev) url = url + "?rev=" + rev;
       next(url);
       this[index] = null;
     };
@@ -130,7 +131,7 @@ var util = function() {
       onComplete: function (event, files, index, xhr, handler) {
         var nextUpload = uploadSequence[ index + 1 ];
         if ( nextUpload ) {
-          uploadSequence.start( index + 1, files[ index ].fileName);
+          uploadSequence.start( index + 1, files[ index ].fileName, handler.response.rev);
         } else {
           var reqOpts = {
             uri: app.config.baseURL + "api/" + handler.response.id,
