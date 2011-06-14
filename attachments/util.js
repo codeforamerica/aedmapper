@@ -85,6 +85,24 @@ var util = function() {
     return baseURL;
   }
   
+  var persist = {
+    restore: function() {
+      $('.persist').each(function(i, el) {
+        var inputId = $(el).attr('id');
+        if(localStorage.getItem(inputId)) $('#' + inputId).val(localStorage.getItem(inputId));
+      })
+    },
+    save: function(id) {
+      localStorage.setItem(id, $('#' + id).val());
+    },
+    clear: function() {
+      $('.persist').each(function(i, el) {
+        localStorage.removeItem($(el).attr('id'));
+      })
+    }
+  }
+
+  
   function bindUpload(form) {
     currentFileName = {};
     uploadSequence = [];
@@ -156,6 +174,7 @@ var util = function() {
     render: render,
     formatMetadata:formatMetadata,
     getBaseURL:getBaseURL,
-    bindUpload: bindUpload
+    bindUpload: bindUpload,
+    persist: persist
   };
 }();

@@ -18,6 +18,15 @@ app.handler = function(route) {
 app.after = {
   home: function() {
     app.map = mapHelper.createMap(app.config);
+    
+    util.persist.restore();
+
+    if (Modernizr.localstorage) {
+      $('.persist').keyup(function(e) {
+        var inputId = $(e.target).attr('id');
+        util.persist.save(inputId);
+      })
+    }
 
     $('#address').keyup(function() {
       $('#address').addClass('loading');
@@ -30,6 +39,8 @@ app.after = {
     
     $('#aed-form').submit(function(e) {
       
+      util.persist.clear();
+        
       if (!app.map.lastCoordinates) {
         alert('Please enter an address first');
         return;
