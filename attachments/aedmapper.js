@@ -19,9 +19,9 @@ app.after = {
   home: function() {
     app.map = mapHelper.createMap(app.config);
     
-    util.persist.restore();
-
     if (Modernizr.localstorage) {
+      util.persist.restore();
+
       $('.persist').keyup(function(e) {
         var inputId = $(e.target).attr('id');
         util.persist.save(inputId);
