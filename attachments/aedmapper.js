@@ -39,7 +39,7 @@ app.after = {
     
     $('#aed-form').submit(function(e) {
       
-      util.persist.clear();
+      if (Modernizr.localstorage) util.persist.clear();
         
       if (!app.map.lastCoordinates) {
         alert('Please enter an address first');

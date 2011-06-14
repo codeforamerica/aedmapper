@@ -25,7 +25,7 @@ function request(options, callback) {
   else if(typeof options.uri != "string")
     throw new Error("options.uri must be a string");
 
-  ; ['proxy', '_redirectsFollowed', 'maxRedirects', 'followRedirect'].forEach(function(opt) {
+  ; $.each(['proxy', '_redirectsFollowed', 'maxRedirects', 'followRedirect'], function(i, opt) {
     if(options[opt])
       throw new Error("options." + opt + " is not supported");
   })
@@ -112,7 +112,7 @@ request.withCredentials = false;
 request.DEFAULT_TIMEOUT = DEFAULT_TIMEOUT;
 
 var shortcuts = [ 'get', 'put', 'post', 'head' ];
-shortcuts.forEach(function(shortcut) {
+$.each(shortcuts, function(i, shortcut) {
   var method = shortcut.toUpperCase();
   var func   = shortcut.toLowerCase();
 
