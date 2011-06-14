@@ -8,7 +8,11 @@
 
 .file_list {margin: 0; padding: 0; border: 0}
 .file_list tr {border-width: 1px 0px; border-style: solid; border-color: #DDD;}
-.file_list td {border: 0px; border-width:0px;}
+.file_list td {text-align: left;border: 0px; border-width:0px;}
+.file_list tr.complete {background-color: #F8FFFC}
+.file_list td.complete {background: url(images/check.png) 5px 5px no-repeat; padding-left: 25px;}
+
+#file_upload:hover .drop_instructions { border-color: #999; }
 
 .file_upload_description {
   font: normal 13px/20px 'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -44,15 +48,9 @@
 
 .file_upload input {
   position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0;
-  border: 300px solid transparent;
-  opacity: 0;
+  top: 0; right: 0; bottom: 0; left: 0; margin: 0; opacity: 0;
   -ms-filter: 'alpha(opacity=0)';
   filter: alpha(opacity=0);
-  -o-transform: translate(-300px, -300px) scale(10);
-  -moz-transform: translate(-800px, 0) scale(10);
   cursor: pointer;
 }
 
